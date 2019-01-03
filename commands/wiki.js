@@ -15,13 +15,14 @@ exports.run = (client, message, args) => {
     }
 
     rp(options)
-        .catch((error) => {
-            console.log(error);
-            message.channel.send("Your search didn't return anything. Try again?");
-            return 0;
-        })
         .then(($) => {
-            obj = JSON.parse($);
-            message.channel.send(obj[3][0]);
+            if (!error) {
+                obj = JSON.parse($);
+                message.channel.send(obj[3][0]);
+            }
+        })
+        .catch((error) => {
+            message.channel.send("Your search didn't return anything. Try again?");
+            console.log(error);
         })
 }
