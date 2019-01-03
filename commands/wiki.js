@@ -13,16 +13,14 @@ exports.run = (client, message, args) => {
             uri : `https://en.wikipedia.org/w/api.php?action=opensearch&search=${args.join(" ")}&format=json`
         }
     }
-
-    rp(options)
-        .then(($) => {
-            if (!error) {
-                obj = JSON.parse($);
-                message.channel.send(obj[3][0]);
-            }
-        })
-        .catch((error) => {
-            message.channel.send("Your search didn't return anything. Try again?");
-            console.log(error);
-        })
+    request(options, function(error, response, body){
+        obj = JSON.parse(body);
+        if (error || obj[3][0] === undefined) {
+            message.channel.send("Sorry, definition not found.")
+            return;
+        }
+        else {
+            message.channel.send(obj[3][0]);
+        }
+    })
 }
