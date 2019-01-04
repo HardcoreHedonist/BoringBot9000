@@ -1,4 +1,3 @@
-
 exports.run = (client, message, args) => {
     request('https://api.nasa.gov/planetary/apod?api_key=dP3Bs8hYmOsdhzYnwPIYweisi5OanwSMw5pQo6Sm', function (error, response, body) 
     {
