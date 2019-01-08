@@ -1,7 +1,8 @@
-exports.run = (client, message, args) => {
+module.exports = (client, reaction, user) => {
+    const message = reaction.message;
+    if (reaction.emoji.name !=="🏵") return;
     let profile = client.getProfile.get(message.author.id);
     if (!profile) {
-        message.channel.send("BEEP BOOP I HATE MY CREATOR")
         profile = {
           id: `${message.guild.id}-${message.author.id}`,
           user: message.author.id,
@@ -9,5 +10,7 @@ exports.run = (client, message, args) => {
           email: ""
         }
     }
-    message.channel.send(profile.points)
+    message.channel.send(`Point removed.`)
+    profile.points--
+    client.setProfile.run(profile);
 }

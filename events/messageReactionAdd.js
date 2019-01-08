@@ -1,6 +1,6 @@
 module.exports = (client, reaction, user) => {
     const message = reaction.message;
-    if (reaction.emoji.id !=="530573677004324866") return;
+    if (reaction.emoji.name !=="🏵") return;
     let profile = client.getProfile.get(message.author.id);
     if (!profile) {
         profile = {
@@ -10,6 +10,7 @@ module.exports = (client, reaction, user) => {
           email: ""
         }
     }
+    message.channel.send(`Point added.`)
     profile.points++
     client.setProfile.run(profile);
 }
