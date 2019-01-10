@@ -1,13 +1,14 @@
 exports.run = (client, message, args) => {
     cmd = args.shift();
     const member = message.mentions.members.first();
+    console.log(message);
     if (member){
         var profile = client.getProfile.get(member.id);
         const embed = {
             "title": `Bio:`,
             "description": `${profile.bio}`,
             "color": member.displayColor,
-            "timestamp": "2019-01-10T01:08:55.845Z",
+            "timestamp": message.createdTimestamp,
             "footer": {
             "text": `Requested by ${message.member.displayName}`,
             "icon_url": `${message.author.avatarURL}`

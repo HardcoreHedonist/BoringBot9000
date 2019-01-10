@@ -1,5 +1,2 @@
 node_modules
 config.json
-profiles.sqlite
-profiles.sqlite-shm
-profiles.sqlite-wal
