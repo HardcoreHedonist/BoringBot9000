@@ -3,7 +3,56 @@ exports.run = (client, message, args) => {
     const member = message.mentions.members.first();
     if (member){
         var profile = client.getProfile.get(member.id);
-        cmd = "show";
+        const embed = {
+            "title": `Bio:`,
+            "description": `${profile.bio}`,
+            "color": member.displayColor,
+            "timestamp": "2019-01-10T01:08:55.845Z",
+            "footer": {
+            "text": `Requested by ${message.member.displayName}`,
+            "icon_url": `${message.author.avatarURL}`
+            },
+            "thumbnail": {
+            "url": `${member.user.avatarURL}`
+            },
+            "author": {
+            "name": `${member.displayName}                                        ${profile.points} points`,
+            "icon_url": `${member.user.avatarURL}`
+            },
+            "fields": [
+            {
+                "name": "Interests:",
+                "value": `${profile.interests}\n`,
+                "inline": true
+            },
+            {
+                "name": "Aliases:",
+                "value": `${profile.aliases}`,
+                "inline": true
+            },
+            {
+                "name": "Name:",
+                "value": `${profile.name}`,
+                "inline": true
+            },
+            {
+                "name": "Email:",
+                "value": `${profile.email}`,
+                "inline": true
+            },
+            {
+                "name": "Age:",
+                "value": `${profile.age}`,
+                "inline": true
+            },
+            {
+                "name": "Pronouns:",
+                "value": `${profile.pronouns}`,
+                "inline": true
+            }
+            ]
+        };
+        message.channel.send(`User Profile for ${member.displayName}`, { embed }).catch(err => message.channel.send("Damn! It looks like you haven't completed your profile. You should go do that."));
     }
     else {
         var profile = client.getProfile.get(message.author.id);
@@ -27,7 +76,7 @@ exports.run = (client, message, args) => {
     switch(cmd){
         case "name":
             const name = args.join(" ");
-            message.channel.send(`Hi there ${name}!`);
+            message.channel.send(`Hi there ${name}! That's a pretty phenominal name.`);
             profile.name = name;
             break;
         case "age":
@@ -49,72 +98,21 @@ exports.run = (client, message, args) => {
             args = args.join(" ");
             args = args.split("and");
             aliases = args.join("\n");
-            message.channel.send(`Your usernames for other accounts are: \n ${aliases}\n\n *Very* creative.`);
+            message.channel.send(`So your other accounts are: \n ${aliases}\n\n I never knew you were so *popular*!`);
             profile.aliases = aliases;
             break;
         case "interests":
             args = args.join(" ");
             args = args.split("and");
             interests = args.join("\n");
-            message.channel.send(`You're interested in \n ${interests}\n\n Sounds fun!`);
+            message.channel.send(`You're interested in: \n ${interests}\n\n Sounds fun!`);
             profile.interests = interests;
             break;
         case "bio":
             bio = args.join(" ");
             message.channel.send(`So you think of yourself as *${bio}*. A bit conceited, but whatever.`)
             profile.bio = bio;
-            break;
-        case "show":
-            const embed = {
-                "title": `Bio:`,
-                "description": `${profile.bio}`,
-                "color": 4952290,
-                "timestamp": "2019-01-10T01:08:55.845Z",
-                "footer": {
-                "text": `${profile.points}`
-                },
-                "thumbnail": {
-                "url": `${message.author.avatarURL}`
-                },
-                "author": {
-                "name": `${message.member.displayName}                                        ${profile.points} points`,
-                "icon_url": `${message.author.avatarURL}`
-                },
-                "fields": [
-                {
-                    "name": "Interests:",
-                    "value": `${profile.interests}\n`,
-                    "inline": true
-                },
-                {
-                    "name": "Aliases:",
-                    "value": `${profile.aliases}`,
-                    "inline": true
-                },
-                {
-                    "name": "Name:",
-                    "value": `${profile.name}`,
-                    "inline": true
-                },
-                {
-                    "name": "Email:",
-                    "value": `${profile.email}`,
-                    "inline": true
-                },
-                {
-                    "name": "Age:",
-                    "value": `${profile.age}`,
-                    "inline": true
-                },
-                {
-                    "name": "Pronouns:",
-                    "value": `${profile.pronouns}`,
-                    "inline": true
-                }
-                ]
-            };
-            message.channel.send(`User Profile for ${message.member.displayName}`, { embed }).catch(err => message.channel.send("Damn! It looks like you haven't completed your profile. You should go do that."));
-                
+            break;                
     };
     
     client.setProfile.run(profile);

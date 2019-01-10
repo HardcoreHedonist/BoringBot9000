@@ -1,2 +1,5 @@
 node_modules
 config.json
+profiles.sqlite
+profiles.shm
+profiles.wal
