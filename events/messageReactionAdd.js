@@ -7,7 +7,13 @@ module.exports = (client, reaction, user) => {
           id: `${message.guild.id}-${message.author.id}`,
           user: message.author.id,
           points: 0,
-          email: ""
+          email:"_",
+          name:"_",
+          age: 0,
+          gender:"_",
+          aliases:"_",
+          interests:"_",
+          bio:"_"
         }
     }
     message.channel.send(`Point added.`)
