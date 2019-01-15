@@ -1,7 +1,20 @@
 exports.run = (client, message, args) => {
     cmd = args.shift();
     const member = message.mentions.members.first();
-    console.log(message);
+    if (!profile) {
+        profile = {
+          id: `${message.guild.id}-${message.author.id}`,
+          user: message.author.id,
+          points: 0,
+          email:"_",
+          name:"_",
+          age: 0,
+          pronouns:"_",
+          aliases:"_",
+          interests:"_",
+          bio:"_"
+        }
+    }
     if (member){
         var profile = client.getProfile.get(member.id);
         const embed = {
@@ -57,21 +70,6 @@ exports.run = (client, message, args) => {
     }
     else {
         var profile = client.getProfile.get(message.author.id);
-    }
-
-    if (!profile) {
-        profile = {
-          id: `${message.guild.id}-${message.author.id}`,
-          user: message.author.id,
-          points: 0,
-          email:"_",
-          name:"_",
-          age: 0,
-          pronouns:"_",
-          aliases:"_",
-          interests:"_",
-          bio:"_"
-        }
     }
 
     switch(cmd){
