@@ -95,14 +95,14 @@ exports.run = (client, message, args) => {
             break;
         case "aliases":
             args = args.join(" ");
-            args = args.split("and");
+            args = args.split(",");
             aliases = args.join("\n");
             message.channel.send(`So your other accounts are: \n ${aliases}\n\n I never knew you were so *popular*!`);
             profile.aliases = aliases;
             break;
         case "interests":
             args = args.join(" ");
-            args = args.split("and");
+            args = args.split(",");
             interests = args.join("\n");
             message.channel.send(`You're interested in: \n ${interests}\n\n Sounds fun!`);
             profile.interests = interests;
