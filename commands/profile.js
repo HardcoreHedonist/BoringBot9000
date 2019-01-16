@@ -4,20 +4,6 @@ exports.run = (client, message, args) => {
     const member = message.mentions.members.first();
     if (member){
         var profile = client.getProfile.get(member.id);
-        if (!profile) {
-            profile = {
-              id: `${message.guild.id}-${message.author.id}`,
-              user: message.author.id,
-              points: 0,
-              email:"_",
-              name:"_",
-              age: 0,
-              pronouns:"_",
-              aliases:"_",
-              interests:"_",
-              bio:"_"
-            }
-        }
         const embed = {
             "title": `Bio:`,
             "description": `${profile.bio}`,
