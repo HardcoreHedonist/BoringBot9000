@@ -17,6 +17,7 @@ exports.run = (client, message, args) => {
               interests:"_",
               bio:"_"
             }
+        }
         const embed = {
             "title": `Bio:`,
             "description": `${profile.bio}`,
@@ -67,7 +68,7 @@ exports.run = (client, message, args) => {
             ]
         };
         message.channel.send(`User Profile for ${member.displayName}`, { embed }).catch(err => message.channel.send("Damn! It looks like you haven't completed your profile. You should go do that."));
-        }
+        
     }
     else {
         var profile = client.getProfile.get(message.author.id);
