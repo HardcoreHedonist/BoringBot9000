@@ -1,22 +1,22 @@
 exports.run = (client, message, args) => {
+
     cmd = args.shift();
     const member = message.mentions.members.first();
-    if (!profile) {
-        profile = {
-          id: `${message.guild.id}-${message.author.id}`,
-          user: message.author.id,
-          points: 0,
-          email:"_",
-          name:"_",
-          age: 0,
-          pronouns:"_",
-          aliases:"_",
-          interests:"_",
-          bio:"_"
-        }
-    }
     if (member){
         var profile = client.getProfile.get(member.id);
+        if (!profile) {
+            profile = {
+              id: `${message.guild.id}-${message.author.id}`,
+              user: message.author.id,
+              points: 0,
+              email:"_",
+              name:"_",
+              age: 0,
+              pronouns:"_",
+              aliases:"_",
+              interests:"_",
+              bio:"_"
+            }
         const embed = {
             "title": `Bio:`,
             "description": `${profile.bio}`,
@@ -67,9 +67,25 @@ exports.run = (client, message, args) => {
             ]
         };
         message.channel.send(`User Profile for ${member.displayName}`, { embed }).catch(err => message.channel.send("Damn! It looks like you haven't completed your profile. You should go do that."));
+        }
     }
     else {
         var profile = client.getProfile.get(message.author.id);
+    }
+
+    if (!profile) {
+        profile = {
+          id: `${message.guild.id}-${message.author.id}`,
+          user: message.author.id,
+          points: 0,
+          email:"_",
+          name:"_",
+          age: 0,
+          pronouns:"_",
+          aliases:"_",
+          interests:"_",
+          bio:"_"
+        }
     }
 
     switch(cmd){
