@@ -75,14 +75,17 @@ exports.run = async (client, message, args) => {
             .then(
                 await message.channel.awaitMessages(() => true, {time: 10000, max: 200})
                 .then( (coll) =>{
+                    multiplier = Players.length;
+                    message.channel.send(Players.length);
                     for (i=0; i<Players.length; i++){
                         coll.array().forEach((answer) => {
                             if (answer.member == Players[i].name){
                                 if (editDistance(Quiz.terms[pair].term.toLowerCase(), answer.content.toLowerCase()) < 3){
-                                    Players[i].points++;
+                                    Players[i].points = Players[i].points + multiplier;
                                 }
                             }
                         })
+                        multiplier--;
                     }
                     Players.forEach((element, no) => {
                         no++;
