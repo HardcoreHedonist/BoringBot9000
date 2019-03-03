@@ -18,5 +18,9 @@ module.exports = (client, reaction, user) => {
     }
     message.channel.send(`Point added.`)
     profile.points++
-    client.setProfile.run(profile);
+    try {
+        client.setProfile.run(profile);
+    } catch (error) {
+        console.log(error);
+    }
 }
